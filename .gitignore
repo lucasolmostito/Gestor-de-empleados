@@ -1,0 +1,6 @@
+secret.json
+.vscode
+aplicattions/departments/migrations/000*
+aplicattions/departments/migrations/__pycache__
+aplicattions/employees/migrations/000*
+aplicattions/employees/migrations/__pycache__

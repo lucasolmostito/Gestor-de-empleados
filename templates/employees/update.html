@@ -1,0 +1,78 @@
+{% extends 'base_generic.html' %}
+
+
+{% block title %}
+Actualizar Empleado
+{% endblock %}
+
+
+{% block content %}
+
+{% include 'includes/header.html' %}
+
+<div class="grid-container">
+    <div class="grid-x">
+        <div class="cell text-center">
+            <h1>Modificar empleado</h1>
+        </div>
+        <div class="cell small-3" style="margin-inline: auto;">
+            <div class="thumbnail">
+                <img class="thumbnail-shadow" src="{{ employees.image.url }}" alt="Empleado">
+            </div>
+        </div>
+        <div class="cell">
+            <form class="grid-x grid-margin-x" method="POST">{% csrf_token %}
+                <div class="cell large-6">
+                    <label>Nombres:
+                        {{ form.name }}
+                    </label>
+                </div>
+                <div class="cell large-3">
+                    <label>Apellidos:
+                        {{ form.surname }}
+                    </label>
+                </div>
+                <div class="cell large-6">
+                    <label>Dirección:
+                        {{ form.adress }}
+                    </label>
+                </div>
+                <div class="cell large-6">
+                    <label>Número de contacto:
+                        {{ form.number }}
+                    </label>
+                </div>
+                <div class="cell large-6">
+                    <label>Correo Electrónico:
+                        {{ form.email }}
+                    </label>
+                </div>
+                <div class="cell large-6">
+                    <label>Trabajo:
+                        {{ form.job }}
+                    </label>
+                </div>
+                <div class="cell large-6">
+                    <label>Departamento:
+                        {{ form.department }}
+                    </label>
+                </div>
+                <div class="cell large-12">
+                    <label>Foto:
+                        {{ form.image }}
+                    </label>
+                </div>
+                <div class="cell large-12">
+                    <label>Habilidades:
+                        {{ form.skills }}
+                    </label>
+                </div>
+                <div class="cell">
+                    <button type="submit" class="success button">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+
+{% block title %}
+    Eliminar Empleado
+{% endblock %}
+
+
+{% block content %}
+    {% include 'includes/header.html' %}
+    <div class="grid-container" style="margin-top: 3%;">
+        <div class="grid-x">
+            <div class="cell callout alert">
+                <h5>ID Empresa: {{ employees.id }}</h5>
+                <h5>Nombre: {{ employees.name }}</h5>
+                <h5>Apellidos: {{ employees.surname }}</h5>
+                
+                {% if employees.image %}
+                <img src="{{ employees.image.url }}" style="margin-inline: auto; width: 20%;" alt="">
+                {% else %}
+                <img src="{% static 'img/silueta-perfil.jpg' %}">
+                {% endif %}
+                    
+                <form class="cell" method="POST">{% csrf_token %}
+                    <h5>¿Desea eliminar este empleado?</h5>
+                    <p>Esta acción será irreversible, asegúrese de tomar la acción.</p>
+                    <button type="submit" class="alert button">Eliminar</button>
+                </form>             
+        </div>
+    </div>
+
+{% endblock %}
+    
+    

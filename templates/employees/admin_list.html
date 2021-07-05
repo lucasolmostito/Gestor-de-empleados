@@ -1,0 +1,95 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+
+{% block title %}
+Lista de Empleados
+{% endblock %}
+
+
+{% block content %}
+{% include 'includes/header.html' %}
+
+<div class="grid-container">
+    <div class="grid-x">
+        <h1 class="cell">Lista de Empleados</h1>
+
+        <form class="cell grid-x grid-margin-x" method="GET"> {% csrf_token %}
+            <div class="cell large-11">
+                <input type="text" placeholder="Buscar empleados" id="kword" name="kword">
+            </div>
+            <div class="cell large-1">
+                <button type="submit"><a class="button primary">Buscar</a></button>
+            </div>
+        </form>
+
+        <table class="cell">
+            <thead>
+                <tr>
+                    <th width="100">ID Empresa</th>
+                    <th>Foto</th>
+                    <th width="125">Nombre</th>
+                    <th width="125">Apellidos</th>
+                    <th width="200">Departamento</th>
+                    <th width="200">Fue añadido el</th>
+                    <th width="115">Acción (Editar)</th>
+                    <th width="115">Acción (Eliminar)</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for e in employees %}
+                <tr>
+                    <td>{{ e.pk }}</td>
+
+                    {% if e.image %}                   
+                    <td width=200px><a class="thumbnail" href="{% url 'employees_app:detail-employee' e.pk %}"><img src="{{ e.image.url }}"></a></td>                  
+                    {% else %}
+                    <td><img src="{% static 'img/silueta-perfil.jpg' %}" alt=""></td>
+                    {% endif %}
+
+                    <td>{{ e.name }}</td>
+                    <td>{{ e.surname }}</td>
+                    <td>{{ e.department }}</td>
+                    <td>{{ e.created }}</td>
+                    <td><a type="submit" class="success button" href="{% url 'employees_app:update-employee' e.pk %} ">Editar</a></td>
+                    <td><a type="submit" class="alert button" href="{% url 'employees_app:delete-employee' e.pk %}">Eliminar</a></td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+        <div class="cell">
+            
+            {% if is_paginated %}
+            <nav aria-label="Pagination">
+                <ul class="pagination text-center"> 
+
+                    {% if page_obj.has_previous %}
+                    <li class="pagination-previous" >
+                        <a href="?page={{page_obj.previous_page_number}}">Antes</a>    
+                    </li>    
+                    {% endif %}
+
+                    {% for page in paginator.page_range %}
+                        {% ifequal page page_obj.number  %}
+                            <li class="current"><span class="show-for-sr">You're on page</span> {{ page }}</li>
+                        {% else %}
+                            <li><a href="?page={{page}}">{{ page }}</a></li> 
+                        {% endifequal %}
+                    {% endfor %}
+                    
+                    {% if page_obj.has_next %}
+                    <li class="pagination-next" >
+                        <a href="?page={{page_obj.next_page_number}}">Siguiente</a>    
+                    </li> 
+                    {% endif %}   
+
+                </ul>
+            </nav>
+            {% endif %} 
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

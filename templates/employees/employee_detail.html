@@ -1,0 +1,49 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+
+{% block title %}
+Detalle de empleado
+{% endblock %}
+
+
+{% block content %}
+
+{% include 'includes/header.html' %}
+
+<div class="grid-container">
+    <div class="grid-x grid-margin-x align-center">
+        <div class="cell large-4 card" style="width: 400px; margin-top: 10px;">
+            <div class="card-divider">
+                {{ employee.get_job_display }}       
+            </div>
+
+            {% if employee.image %}
+            <img src="{{ employee.image.url }}">
+            {% else %}
+            <img src="{% static 'img/silueta-perfil.jpg' %}">
+            {% endif %}
+
+            <div class="card-section">
+                <div class="callout primary">
+                    <h4>{{ employee.full_name }}</h4>
+                    <p>{{ employee.adress }}</p>
+                    <p>{{ employee.email }}</p>
+                    <p>{{ employee.number }}</p>
+                </div>
+                <p>Fecha de registro: {{ employee.created }}</p>
+                <p>Departamento: {{ employee.department.shorname }}</p>
+                <p><span class="label">Habilidades</span></p>
+                <ul class="vertical menu">
+
+                    {% for h in employee.skills.all %}
+                    <li>{{ h.skill }}</li>
+                    {% endfor %}
+
+                </ul>
+                <a class="button warning" href="{% url 'employees_app:list-employees-admin' %}">Atrás</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

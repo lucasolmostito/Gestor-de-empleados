@@ -1,0 +1,67 @@
+{% extends 'base_generic.html' %}
+
+{% block title %}
+    Crear empleado
+{% endblock %}
+
+
+{% block content %}
+
+    {% include 'includes/header.html' %}
+    <div class="grid-container">
+        <div class="grid-x">
+            <h1 class="cell">Registrar empleado</h1>
+            <form class="cell grid-x grid-margin-x" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                <div class="medium-6 cell">
+                    <label>Nombre:
+                        {{ form.name }}
+                    </label>
+                </div>
+                <div class="medium-6 cell">
+                    <label>Apellidos:
+                        {{ form.surname }}
+                    </label>
+                </div>
+                <div class="medium-6 cell">
+                    <label>Dirección:
+                        {{ form.adress }}
+                    </label>
+                </div>
+                <div class="medium-6 cell">
+                    <label>Correo Electrónico:
+                        {{ form.email }}
+                    </label>
+                </div>
+                <div class="medium-6 cell">
+                    <label>Teléfono de Contaco:
+                        {{ form.number }}
+                    </label>
+                </div>
+                <div class="medium-6 cell">
+                    <label>Trabajo:
+                        {{ form.job }}
+                    </label>
+                </div>
+                <div class="medium-6 cell">
+                    <label>Departamento:
+                        {{ form.department }}
+                    </label>
+                </div>
+                <div class="medium-12 cell">
+                    <label>Habilidades:
+                        {{ form.skills }}
+                    </label>
+                </div>
+                <div class="medium-12 cell">
+                    <label>Foto:
+                        {{ form.image }}
+                    </label>
+                </div>
+                <div class="medium-12 cell">
+                    <button type="submit" class="button success">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
